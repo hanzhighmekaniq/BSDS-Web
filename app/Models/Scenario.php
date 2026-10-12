@@ -14,17 +14,32 @@ class Scenario extends Model
     protected $fillable = [
         'case_id',
         'step_code',
+        'scenario_type',
+        'is_start',
+        'decision_no',
         'title',
         'story_text',
         'customer_dialogue',
+        'new_problem_text',
         'is_ending',
+        'max_investigations',
+        'sort_order',
     ];
 
     protected function casts(): array
     {
         return [
+            'is_start' => 'boolean',
             'is_ending' => 'boolean',
+            'decision_no' => 'integer',
+            'max_investigations' => 'integer',
+            'sort_order' => 'integer',
         ];
+    }
+
+    public function hints(): HasMany
+    {
+        return $this->hasMany(Hint::class, 'scenario_id')->orderBy('level');
     }
 
     public function case(): BelongsTo

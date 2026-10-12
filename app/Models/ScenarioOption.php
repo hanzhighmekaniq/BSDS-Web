@@ -17,14 +17,21 @@ class ScenarioOption extends Model
         'label',
         'option_text',
         'consequence_text',
-        'score_weights',
+        'consequence_type',
+        'outcome_tag',
+        'sort_order',
     ];
 
     protected function casts(): array
     {
         return [
-            'score_weights' => 'array',
+            'sort_order' => 'integer',
         ];
+    }
+
+    public function indicatorScores(): HasMany
+    {
+        return $this->hasMany(OptionIndicatorScore::class, 'option_id');
     }
 
     public function scenario(): BelongsTo

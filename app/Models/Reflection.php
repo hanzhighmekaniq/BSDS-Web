@@ -13,8 +13,9 @@ class Reflection extends Model
     protected $fillable = [
         'session_id',
         'q1_reason',
-        'q2_unexpected_consequence',
-        'q3_future_action',
+        'q2_hardest_decision',
+        'q3_unexpected_consequence',
+        'q4_future_action',
     ];
 
     public function session(): BelongsTo

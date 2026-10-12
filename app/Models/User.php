@@ -35,4 +35,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(SimulationSession::class);
     }
+
+    public function studentProfile()
+    {
+        return $this->hasOne(StudentProfile::class);
+    }
 }

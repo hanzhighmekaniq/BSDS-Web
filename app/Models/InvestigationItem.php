@@ -15,7 +15,17 @@ class InvestigationItem extends Model
         'title',
         'type',
         'content',
+        'is_relevant',
+        'sort_order',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_relevant' => 'boolean',
+            'sort_order' => 'integer',
+        ];
+    }
 
     public function scenario(): BelongsTo
     {

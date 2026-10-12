@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <div class="mb-6 text-center">
+        <h2 class="font-heading font-semibold text-lg text-bsds-navy">Let's start your simulation</h2>
+        <p class="text-sm text-bsds-gray mt-1">Buat akun untuk mulai berlatih mengambil keputusan.</p>
+    </div>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -14,6 +19,32 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <!-- Kelas -->
+        <div class="mt-4">
+            <x-input-label for="classroom_id" value="Kelas" />
+            <select id="classroom_id" name="classroom_id" required class="block mt-1 w-full rounded-xl border-bsds-border focus:border-bsds-teal focus:ring-bsds-teal shadow-sm text-sm">
+                <option value="">Pilih kelas</option>
+                @foreach ($classrooms as $classroom)
+                    <option value="{{ $classroom->id }}" @selected(old('classroom_id') == $classroom->id)>{{ $classroom->name }} ({{ $classroom->academic_year }})</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('classroom_id')" class="mt-2" />
+        </div>
+
+        <!-- No. Absen -->
+        <div class="mt-4">
+            <x-input-label for="absence_no" value="No. Absen" />
+            <x-text-input id="absence_no" class="block mt-1 w-full" type="number" min="1" max="200" name="absence_no" :value="old('absence_no')" required />
+            <x-input-error :messages="$errors->get('absence_no')" class="mt-2" />
+        </div>
+
+        <!-- NIS / Kode Peserta -->
+        <div class="mt-4">
+            <x-input-label for="nis" value="NIS / Kode Peserta" />
+            <x-text-input id="nis" class="block mt-1 w-full" type="text" name="nis" :value="old('nis')" required />
+            <x-input-error :messages="$errors->get('nis')" class="mt-2" />
         </div>
 
         <!-- Password -->
@@ -40,7 +71,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            <a class="underline text-sm text-bsds-gray hover:text-bsds-navy rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bsds-teal" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 

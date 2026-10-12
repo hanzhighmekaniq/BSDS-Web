@@ -15,10 +15,15 @@ class SimulationSession extends Model
     protected $fillable = [
         'user_id',
         'case_id',
+        'mode',
+        'attempt_no',
         'current_scenario_id',
         'status',
         'started_at',
         'completed_at',
+        'duration_seconds',
+        'final_outcome',
+        'last_activity_at',
     ];
 
     protected function casts(): array
@@ -26,7 +31,30 @@ class SimulationSession extends Model
         return [
             'started_at' => 'datetime',
             'completed_at' => 'datetime',
+            'last_activity_at' => 'datetime',
+            'attempt_no' => 'integer',
+            'duration_seconds' => 'integer',
         ];
+    }
+
+    public function isPractice(): bool
+    {
+        return $this->mode === 'practice';
+    }
+
+    public function hintUsages(): HasMany
+    {
+        return $this->hasMany(HintUsage::class, 'session_id');
+    }
+
+    public function investigationViews(): HasMany
+    {
+        return $this->hasMany(InvestigationView::class, 'session_id');
+    }
+
+    public function indicatorResults(): HasMany
+    {
+        return $this->hasMany(SessionIndicatorResult::class, 'session_id');
     }
 
     public function user(): BelongsTo

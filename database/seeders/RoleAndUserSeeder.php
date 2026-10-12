@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Classroom;
+use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +21,7 @@ class RoleAndUserSeeder extends Seeder
         $studentRole = Role::firstOrCreate(['name' => 'student', 'guard_name' => 'web']);
 
         $admin = User::firstOrCreate(
-            ['email' => 'admin@bsds.test'],
+            ['email' => 'admin@gmail.com'],
             [
                 'name' => 'Administrator BSDS',
                 'password' => Hash::make('password'),
@@ -44,5 +46,15 @@ class RoleAndUserSeeder extends Seeder
             ]
         );
         $student->syncRoles([$studentRole]);
+
+        $classroom = Classroom::firstOrCreate(
+            ['name' => 'XI MPLB 1', 'academic_year' => '2026/2027'],
+            ['is_active' => true]
+        );
+
+        StudentProfile::firstOrCreate(
+            ['user_id' => $student->id],
+            ['classroom_id' => $classroom->id, 'nis' => 'BSDS-001', 'absence_no' => 1]
+        );
     }
 }

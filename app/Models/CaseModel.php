@@ -16,9 +16,12 @@ class CaseModel extends Model
         'code',
         'title',
         'description',
-        'difficulty',
+        'level',
+        'role_title',
+        'briefing_text',
         'estimated_time',
         'is_active',
+        'sort_order',
     ];
 
     protected function casts(): array
@@ -26,6 +29,7 @@ class CaseModel extends Model
         return [
             'is_active' => 'boolean',
             'estimated_time' => 'integer',
+            'sort_order' => 'integer',
         ];
     }
 
@@ -41,7 +45,8 @@ class CaseModel extends Model
 
     public function initialScenario(): ?Scenario
     {
-        return $this->scenarios()->where('step_code', 'S1')->first()
+        return $this->scenarios()->where('is_start', true)->first()
+            ?? $this->scenarios()->where('step_code', 'S1')->first()
             ?? $this->scenarios()->orderBy('id')->first();
     }
 }

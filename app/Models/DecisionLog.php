@@ -12,16 +12,23 @@ class DecisionLog extends Model
 
     protected $fillable = [
         'session_id',
+        'step_order',
         'scenario_id',
         'option_id',
         'confidence_level',
-        'investigations_viewed',
+        'presented_at',
+        'answered_at',
+        'time_spent_seconds',
+        'consequence_type',
     ];
 
     protected function casts(): array
     {
         return [
-            'investigations_viewed' => 'array',
+            'step_order' => 'integer',
+            'presented_at' => 'datetime',
+            'answered_at' => 'datetime',
+            'time_spent_seconds' => 'integer',
         ];
     }
 

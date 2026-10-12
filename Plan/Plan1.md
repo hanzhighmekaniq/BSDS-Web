@@ -107,3 +107,21 @@ Untuk menjaga integritas data penelitian dan kestabilan sistem:
 ### Fase 5: Pengujian (Testing) & Finalisasi
 - Pengujian skenario ujung-ke-ujung (*end-to-end*): rute mitigasi tepat vs rute eskalasi masalah.
 - Validasi export Excel dan pengujian batas sanitasi teks esai.
+
+---
+
+## 7. Pembaruan Skema & Status (12 Okt 2026)
+
+Dokumen ini diselaraskan dengan `DESAIN WEB PENELITIAN PUTRI.pdf`. Detail lengkap ada di migration `2026_10_12_090000_extend_branching_simulator_tables.php`.
+
+**Keputusan desain:** siswa login dengan akun; ada Practice & Assessment Mode; scope v1 = hint bertahap, what-if, skor indikator (rubrik), progress antar kasus. Indikator saat ini PLACEHOLDER (dari contoh PDF) dan harus diganti dengan indikator final Bab III. Warna utama Navy `#17324D`.
+
+**Tabel tambahan:** `classrooms`, `student_profiles`, `hints`, `hint_usages`, `investigation_views` (pengganti JSON `investigations_viewed`), `indicators`, `option_indicator_scores` (pengganti `score_weights`), `session_indicator_results`, `feedback_templates`.
+
+**Kolom tambahan penting:** `simulation_sessions.mode/attempt_no/duration_seconds/final_outcome`, `decision_logs.step_order/time_spent_seconds/consequence_type`, `scenarios.is_start/scenario_type/decision_no/max_investigations`, `scenario_options.consequence_type`, `reflections` 4 pertanyaan (q1-q4).
+
+**Alur Case 01 (4 keputusan + cabang remedial):**
+`S1 -B-> S2 ; S1 -A/C-> S1-R -> S2 ; S2 -B/C-> S3 ; S2 -A-> S2-H -> S3 ; S3 -A/B-> S4 ; S3 -C-> END-BAD ; S4 -B-> END-GOOD / -A-> END-FAIR / -C-> END-BAD`
+Validasi graf: `php artisan bsds:validate-case`.
+
+**Status fase:** Fase 1-4 selesai: engine, hint, investigasi, konsekuensi, journey, what-if, refleksi, profil performa; analitik peneliti (`/research`) + ekspor `.xlsx` 4 sheet (Responden, Keputusan, Indikator, Refleksi); panel admin (`/admin`: pengguna, impor siswa CSV/XLSX, kelas, metadata kasus + validasi graf, indikator + umpan balik). Belum dikerjakan: Case 02-04, editor isi skenario lewat UI (isi skenario dikelola lewat seeder), uji coba di browser, dan penggantian indikator placeholder dengan indikator final Bab III.
