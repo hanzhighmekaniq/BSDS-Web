@@ -9,8 +9,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
+    <div class="w-full space-y-8">
             @if (session('status'))
                 <div class="p-3 bg-bsds-teal/10 border border-bsds-teal/30 text-bsds-ink rounded-lg text-sm">{{ session('status') }}</div>
             @endif
@@ -98,5 +97,4 @@
                 </div>
             @endif
         </div>
-    </div>
 </x-app-layout>

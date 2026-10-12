@@ -9,8 +9,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
 
             <div class="bg-white rounded-2xl border border-bsds-border p-6">
                 <h3 class="font-heading font-semibold text-xl text-bsds-navy">{{ $greeting }}, {{ explode(' ', auth()->user()->name)[0] }}</h3>
@@ -105,5 +104,4 @@
                 </div>
             @endrole
         </div>
-    </div>
 </x-app-layout>

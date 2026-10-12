@@ -10,8 +10,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
             @include('admin._messages')
 
             <form method="POST" action="{{ $editing ? route('admin.classrooms.update', $classroom) : route('admin.classrooms.store') }}" class="bg-white rounded-2xl border border-bsds-border p-6 space-y-5">
@@ -34,5 +33,4 @@
                 </div>
             </form>
         </div>
-    </div>
 </x-app-layout>

@@ -16,52 +16,51 @@
 @endphp
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-heading font-semibold text-xl text-bsds-navy leading-tight">
+        <h2 class="text-xl font-semibold leading-tight font-heading text-bsds-navy">
             {{ __('Panduan') }}
         </h2>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
 
-            <div class="bg-white rounded-2xl border border-bsds-border p-6 md:p-8">
-                <h3 class="font-heading font-semibold text-lg text-bsds-navy mb-6">How to Play</h3>
+            <div class="p-6 bg-white border rounded-2xl border-bsds-border md:p-8">
+                <h3 class="mb-6 text-lg font-semibold font-heading text-bsds-navy">How to Play</h3>
 
                 <div class="space-y-5">
                     @foreach ($steps as $step)
                         <div class="flex items-start gap-4">
-                            <span class="shrink-0 w-10 h-10 rounded-xl bg-bsds-navy text-white flex items-center justify-center font-heading font-semibold text-sm">
+                            <span class="flex items-center justify-center w-10 h-10 text-sm font-semibold text-white shrink-0 rounded-xl bg-bsds-navy font-heading">
                                 {{ $step['code'] }}
                             </span>
                             <div>
-                                <h4 class="font-heading font-semibold text-bsds-navy">{{ $step['title'] }}</h4>
+                                <h4 class="font-semibold font-heading text-bsds-navy">{{ $step['title'] }}</h4>
                                 <p class="text-sm text-bsds-gray mt-0.5">{{ $step['desc'] }}</p>
                             </div>
                         </div>
                         @unless ($loop->last)
-                            <div class="ml-5 h-5 border-l-2 border-dashed border-bsds-border"></div>
+                            <div class="h-5 ml-5 border-l-2 border-dashed border-bsds-border"></div>
                         @endunless
                     @endforeach
                 </div>
 
-                <div class="mt-6 rounded-xl border border-bsds-orange bg-bsds-orange/10 p-4">
+                <div class="p-4 mt-6 border rounded-xl border-bsds-orange bg-bsds-orange/10">
                     <p class="text-sm text-bsds-ink">
                         <span class="font-semibold">Ingat:</span> bisa jadi ada lebih dari satu tindakan yang masuk akal. Yang terpenting adalah bagaimana Anda mempertimbangkan masalah, informasi, dan konsekuensinya.
                     </p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl border border-bsds-border p-6 md:p-8">
-                <h3 class="font-heading font-semibold text-lg text-bsds-navy mb-6">Fitur yang Akan Anda Temui</h3>
+            <div class="p-6 bg-white border rounded-2xl border-bsds-border md:p-8">
+                <h3 class="mb-6 text-lg font-semibold font-heading text-bsds-navy">Fitur yang Akan Anda Temui</h3>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
                     @foreach ($features as $feature)
                         <div>
-                            <div class="w-10 h-10 rounded-xl bg-bsds-teal/10 text-bsds-teal flex items-center justify-center mb-3">
+                            <div class="flex items-center justify-center w-10 h-10 mb-3 rounded-xl bg-bsds-teal/10 text-bsds-teal">
                                 <x-dynamic-component :component="'heroicon-o-'.$feature['icon']" class="w-5 h-5" />
                             </div>
-                            <h4 class="font-heading font-semibold text-bsds-navy text-sm">{{ $feature['title'] }}</h4>
-                            <p class="text-xs text-bsds-gray mt-1 leading-relaxed">{{ $feature['desc'] }}</p>
+                            <h4 class="text-sm font-semibold font-heading text-bsds-navy">{{ $feature['title'] }}</h4>
+                            <p class="mt-1 text-xs leading-relaxed text-bsds-gray">{{ $feature['desc'] }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -73,5 +72,4 @@
                 </a>
             </div>
         </div>
-    </div>
 </x-app-layout>

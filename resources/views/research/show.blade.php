@@ -20,8 +20,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 @foreach ([['Mode', $session->mode], ['Status', $session->status], ['Durasi (dtk)', $session->duration_seconds ?? '-'], ['Hasil akhir', $categoryLabel[$session->final_outcome] ?? '-']] as [$label, $value])
@@ -85,5 +84,4 @@
                 @endif
             </div>
         </div>
-    </div>
 </x-app-layout>

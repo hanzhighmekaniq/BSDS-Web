@@ -32,8 +32,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-8">
+    <div class="w-full space-y-8">
 
             @if (session('status'))
                 <div class="p-3 bg-bsds-teal/10 border border-bsds-teal/30 text-bsds-ink rounded-lg text-sm">{{ session('status') }}</div>
@@ -160,5 +159,4 @@
                 <a href="{{ route('simulations.index') }}" class="min-h-[48px] inline-flex items-center px-6 rounded-xl border-2 border-bsds-navy text-bsds-navy hover:bg-bsds-navy hover:text-white font-semibold text-sm transition">Kembali ke Daftar Kasus</a>
             </div>
         </div>
-    </div>
 </x-app-layout>

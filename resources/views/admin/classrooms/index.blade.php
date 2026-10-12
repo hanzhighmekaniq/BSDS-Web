@@ -1,22 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="space-y-3">
-            <h2 class="font-heading font-semibold text-xl text-bsds-navy leading-tight">Administrasi</h2>
+            <h2 class="text-xl font-semibold leading-tight font-heading text-bsds-navy">Administrasi</h2>
             <x-admin-tabs />
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
             @include('admin._messages')
 
             <div class="flex justify-end">
                 <a href="{{ route('admin.classrooms.create') }}" class="min-h-[40px] inline-flex items-center px-4 rounded-xl bg-bsds-teal hover:bg-bsds-navy text-white text-sm font-semibold transition">+ Tambah kelas</a>
             </div>
 
-            <div class="bg-white rounded-2xl border border-bsds-border overflow-x-auto">
+            <div class="overflow-x-auto bg-white border rounded-2xl border-bsds-border">
                 <table class="min-w-full text-sm">
-                    <thead class="bg-bsds-bg text-xs uppercase tracking-wider text-bsds-gray">
+                    <thead class="text-xs tracking-wider uppercase bg-bsds-bg text-bsds-gray">
                         <tr><th class="px-4 py-3 text-left">Kelas</th><th class="px-4 py-3 text-left">Tahun ajaran</th><th class="px-4 py-3 text-left">Siswa</th><th class="px-4 py-3 text-left">Status</th><th class="px-4 py-3"></th></tr>
                     </thead>
                     <tbody class="divide-y divide-bsds-border">
@@ -30,7 +29,7 @@
                                     <a href="{{ route('admin.classrooms.edit', $c) }}" class="text-xs font-semibold text-bsds-teal hover:underline">Ubah</a>
                                     <form method="POST" action="{{ route('admin.classrooms.destroy', $c) }}" class="inline" onsubmit="return confirm('Hapus kelas ini?')">
                                         @csrf @method('DELETE')
-                                        <button class="text-xs font-semibold text-bsds-error hover:underline ml-3">Hapus</button>
+                                        <button class="ml-3 text-xs font-semibold text-bsds-error hover:underline">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -41,5 +40,4 @@
                 </table>
             </div>
         </div>
-    </div>
 </x-app-layout>

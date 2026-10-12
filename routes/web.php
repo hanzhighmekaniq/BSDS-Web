@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CaseController as AdminCaseController;
 use App\Http\Controllers\Admin\ClassroomController as AdminClassroomController;
 use App\Http\Controllers\Admin\IndicatorController as AdminIndicatorController;
+use App\Http\Controllers\Admin\ScenarioController as AdminScenarioController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResearchController;
@@ -112,9 +113,21 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('users/import', [AdminUserController::class, 'import'])->name('users.import');
     Route::resource('users', AdminUserController::class)->except('show');
     Route::resource('classrooms', AdminClassroomController::class)->except('show');
+    Route::get('cases/create', [AdminCaseController::class, 'create'])->name('cases.create');
+    Route::post('cases', [AdminCaseController::class, 'store'])->name('cases.store');
+    Route::post('cases/import', [AdminCaseController::class, 'import'])->name('cases.import');
     Route::get('cases', [AdminCaseController::class, 'index'])->name('cases.index');
     Route::get('cases/{case}/edit', [AdminCaseController::class, 'edit'])->name('cases.edit');
     Route::put('cases/{case}', [AdminCaseController::class, 'update'])->name('cases.update');
+    Route::delete('cases/{case}', [AdminCaseController::class, 'destroy'])->name('cases.destroy');
+    Route::post('cases/{case}/duplicate', [AdminCaseController::class, 'duplicate'])->name('cases.duplicate');
+    Route::get('cases/{case}/export', [AdminCaseController::class, 'export'])->name('cases.export');
+
+    Route::get('cases/{case}/scenarios/create', [AdminScenarioController::class, 'create'])->name('cases.scenarios.create');
+    Route::post('cases/{case}/scenarios', [AdminScenarioController::class, 'store'])->name('cases.scenarios.store');
+    Route::get('cases/{case}/scenarios/{scenario}/edit', [AdminScenarioController::class, 'edit'])->name('cases.scenarios.edit');
+    Route::put('cases/{case}/scenarios/{scenario}', [AdminScenarioController::class, 'update'])->name('cases.scenarios.update');
+    Route::delete('cases/{case}/scenarios/{scenario}', [AdminScenarioController::class, 'destroy'])->name('cases.scenarios.destroy');
     Route::get('indicators', [AdminIndicatorController::class, 'index'])->name('indicators.index');
     Route::get('indicators/{indicator}/edit', [AdminIndicatorController::class, 'edit'])->name('indicators.edit');
     Route::put('indicators/{indicator}', [AdminIndicatorController::class, 'update'])->name('indicators.update');

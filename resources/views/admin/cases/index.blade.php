@@ -6,9 +6,20 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
             @include('admin._messages')
+
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <form action="{{ route('admin.cases.import') }}" method="POST" enctype="multipart/form-data" class="flex items-center gap-2">
+                    @csrf
+                    <label class="cursor-pointer inline-flex items-center px-3 py-2 rounded-xl border border-bsds-border bg-white text-xs font-semibold text-bsds-ink hover:bg-bsds-bg transition">
+                        <span>Pilih JSON Kasus</span>
+                        <input type="file" name="json_file" accept=".json,application/json" class="sr-only" onchange="this.form.submit()">
+                    </label>
+                    <span class="text-xs text-bsds-gray">atau</span>
+                </form>
+                <a href="{{ route('admin.cases.create') }}" class="min-h-[40px] inline-flex items-center px-4 rounded-xl bg-bsds-teal hover:bg-bsds-navy text-white text-sm font-semibold transition">+ Tambah Kasus</a>
+            </div>
 
             <div class="bg-white rounded-2xl border border-bsds-border overflow-x-auto">
                 <table class="min-w-full text-sm">
@@ -30,13 +41,28 @@
                                     @endif
                                 </td>
                                 <td class="px-4 py-3">{{ $c->is_active ? 'Aktif' : 'Nonaktif' }}</td>
-                                <td class="px-4 py-3 text-right"><a href="{{ route('admin.cases.edit', $c) }}" class="text-xs font-semibold text-bsds-teal hover:underline">Ubah</a></td>
+                                <td class="px-4 py-3 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <a href="{{ route('admin.cases.edit', $c) }}" class="text-xs font-semibold text-bsds-teal hover:underline">Ubah</a>
+                                        <form method="POST" action="{{ route('admin.cases.duplicate', $c) }}" onsubmit="return confirm('Duplikasi kasus {{ $c->code }} beserta seluruh skenario dan opsinya?')">
+                                            @csrf
+                                            <button type="submit" class="text-xs font-semibold text-bsds-navy hover:underline">Duplikat</button>
+                                        </form>
+                                        <a href="{{ route('admin.cases.export', $c) }}" class="text-xs font-semibold text-bsds-gray hover:underline">Export</a>
+                                        @if ($c->simulation_sessions_count === 0)
+                                            <form method="POST" action="{{ route('admin.cases.destroy', $c) }}" onsubmit="return confirm('Hapus permanen kasus {{ $c->code }}? Skenario di dalamnya juga akan terhapus.')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-xs font-semibold text-bsds-error hover:underline">Hapus</button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            <p class="text-xs text-bsds-gray">Isi skenario (opsi, konsekuensi, hint, skor) dikelola lewat seeder. Panel ini mengubah metadata kasus dan menampilkan validasi graf.</p>
+            <p class="text-xs text-bsds-gray">Klik "Ubah" pada sebuah kasus untuk mengelola skenario, opsi, item investigasi, hint, dan skor indikatornya.</p>
         </div>
-    </div>
 </x-app-layout>

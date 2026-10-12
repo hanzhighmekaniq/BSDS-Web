@@ -13,8 +13,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
 
             <div class="bg-white rounded-2xl border border-bsds-border p-6 space-y-2">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-bsds-gray">Your decision</h3>
@@ -49,5 +48,4 @@
                 @endif
             </div>
         </div>
-    </div>
 </x-app-layout>

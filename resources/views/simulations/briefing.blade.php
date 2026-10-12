@@ -9,8 +9,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
 
             <div class="flex items-center gap-3">
                 <span class="px-2.5 py-1 text-xs font-semibold rounded-full uppercase bg-bsds-navy/10 text-bsds-navy tracking-wider">{{ $case->code }}</span>
@@ -50,5 +49,4 @@
                 </form>
             </div>
         </div>
-    </div>
 </x-app-layout>

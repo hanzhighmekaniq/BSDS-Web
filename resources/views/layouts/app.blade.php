@@ -30,8 +30,10 @@
                 @endisset
 
                 <!-- Page Content -->
-                <main class="flex-1">
-                    {{ $slot }}
+                <main class="flex-1 py-8">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        {{ $slot }}
+                    </div>
                 </main>
             </div>
         </div>

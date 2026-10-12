@@ -11,8 +11,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
             @include('admin._messages')
 
             <form method="POST" action="{{ $editing ? route('admin.users.update', $user) : route('admin.users.store') }}"
@@ -62,5 +61,4 @@
                 </div>
             </form>
         </div>
-    </div>
 </x-app-layout>

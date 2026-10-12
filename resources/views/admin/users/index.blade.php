@@ -6,8 +6,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
             @include('admin._messages')
 
             <div class="flex flex-wrap items-end justify-between gap-3">
@@ -61,5 +60,4 @@
             </div>
             {{ $users->links() }}
         </div>
-    </div>
 </x-app-layout>

@@ -24,7 +24,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg"
+    <div class="w-full"
         x-data="simulation({
             investigateUrl: '{{ url('simulations/'.$session->id.'/investigate') }}',
             hintUrl: '{{ route('simulations.hint', $session) }}',
@@ -34,7 +34,7 @@
             hints: @js($scenario->hints->whereIn('level', $usedHintLevels)->map(fn ($h) => ['level' => $h->level, 'text' => $h->hint_text])->values()),
             hintsTotal: {{ $scenario->hints->count() }},
         })">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="w-full space-y-6">
 
             @if (session('status'))
                 <div class="p-3 bg-bsds-teal/10 border border-bsds-teal/30 text-bsds-ink rounded-lg text-sm">{{ session('status') }}</div>

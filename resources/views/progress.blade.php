@@ -5,19 +5,18 @@
 @endphp
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-heading font-semibold text-xl text-bsds-navy leading-tight">
+        <h2 class="text-xl font-semibold leading-tight font-heading text-bsds-navy">
             {{ __('Progress Saya') }}
         </h2>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
 
             {{-- Ringkasan --}}
-            <div class="bg-white rounded-2xl border border-bsds-border p-6">
+            <div class="p-6 bg-white border rounded-2xl border-bsds-border">
                 <div class="flex items-center justify-between mb-2">
-                    <h3 class="font-heading font-semibold text-bsds-navy">Cases Completed</h3>
-                    <span class="font-heading font-semibold text-2xl text-bsds-navy">{{ $completedCount }}/{{ $totalCases }}</span>
+                    <h3 class="font-semibold font-heading text-bsds-navy">Cases Completed</h3>
+                    <span class="text-2xl font-semibold font-heading text-bsds-navy">{{ $completedCount }}/{{ $totalCases }}</span>
                 </div>
                 <div class="h-2.5 bg-bsds-border rounded-full overflow-hidden">
                     <div class="h-2.5 rounded-full bg-bsds-teal" style="width: {{ $percent }}%"></div>
@@ -25,9 +24,9 @@
             </div>
 
             {{-- Skill breakdown --}}
-            <div class="bg-white rounded-2xl border border-bsds-border p-6 md:p-8">
-                <h3 class="font-heading font-semibold text-bsds-navy mb-1">Skill Breakdown</h3>
-                <p class="text-xs text-bsds-gray mb-6">Rata-rata dihitung dari seluruh kasus yang sudah Anda selesaikan.</p>
+            <div class="p-6 bg-white border rounded-2xl border-bsds-border md:p-8">
+                <h3 class="mb-1 font-semibold font-heading text-bsds-navy">Skill Breakdown</h3>
+                <p class="mb-6 text-xs text-bsds-gray">Rata-rata dihitung dari seluruh kasus yang sudah Anda selesaikan.</p>
 
                 @forelse ($indicators as $indicator)
                     @php $avg = $indicatorAverages[$indicator->id] ?? null; @endphp
@@ -36,7 +35,7 @@
                             <span class="text-bsds-ink">{{ $indicator->name }}</span>
                             <span class="font-semibold text-bsds-navy">{{ $avg !== null ? $avg.'%' : '-' }}</span>
                         </div>
-                        <div class="h-2 bg-bsds-border rounded-full overflow-hidden">
+                        <div class="h-2 overflow-hidden rounded-full bg-bsds-border">
                             <div class="h-2 rounded-full bg-bsds-teal" style="width: {{ $avg ?? 0 }}%"></div>
                         </div>
                     </div>
@@ -45,23 +44,23 @@
                 @endforelse
 
                 @if ($completedCount === 0)
-                    <p class="text-sm text-bsds-gray mt-4 pt-4 border-t border-bsds-border">Selesaikan minimal satu kasus untuk melihat skill breakdown Anda.</p>
+                    <p class="pt-4 mt-4 text-sm border-t text-bsds-gray border-bsds-border">Selesaikan minimal satu kasus untuk melihat skill breakdown Anda.</p>
                 @endif
             </div>
 
             {{-- Case checklist --}}
-            <div class="bg-white rounded-2xl border border-bsds-border p-6 md:p-8">
-                <h3 class="font-heading font-semibold text-bsds-navy mb-4">Cases</h3>
+            <div class="p-6 bg-white border rounded-2xl border-bsds-border md:p-8">
+                <h3 class="mb-4 font-semibold font-heading text-bsds-navy">Cases</h3>
                 <div class="divide-y divide-bsds-border">
                     @foreach ($cases as $case)
                         @php $done = $completedCaseIds->contains($case->id); @endphp
-                        <div class="py-3 flex items-center gap-3">
+                        <div class="flex items-center gap-3 py-3">
                             @if ($done)
-                                <span class="w-6 h-6 rounded-full bg-bsds-success text-white flex items-center justify-center shrink-0">
+                                <span class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-bsds-success shrink-0">
                                     <x-heroicon-o-check class="w-4 h-4" />
                                 </span>
                             @else
-                                <span class="w-6 h-6 rounded-full border-2 border-bsds-border shrink-0"></span>
+                                <span class="w-6 h-6 border-2 rounded-full border-bsds-border shrink-0"></span>
                             @endif
                             <span class="text-sm {{ $done ? 'text-bsds-ink font-medium' : 'text-bsds-gray' }}">{{ $case->title }}</span>
                         </div>
@@ -75,5 +74,4 @@
                 </a>
             </div>
         </div>
-    </div>
 </x-app-layout>

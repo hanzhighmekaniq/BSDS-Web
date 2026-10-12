@@ -16,8 +16,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
 
             {{-- Filter --}}
             <form method="GET" class="bg-white rounded-2xl border border-bsds-border p-4 grid grid-cols-2 md:grid-cols-5 gap-3 items-end">
@@ -126,5 +125,4 @@
 
             {{ $sessions->links() }}
         </div>
-    </div>
 </x-app-layout>

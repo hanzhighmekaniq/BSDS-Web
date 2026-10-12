@@ -15,8 +15,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-bsds-bg">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="w-full space-y-6">
 
             @if ($errors->any())
                 <div class="p-3 bg-amber-50 border border-bsds-warning text-bsds-ink rounded-lg text-sm">
@@ -46,5 +45,4 @@
                 </div>
             </form>
         </div>
-    </div>
 </x-app-layout>
