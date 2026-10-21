@@ -84,7 +84,7 @@
             <!-- Feature Drawer -->
             <div x-show="menuOpen" x-transition x-cloak @click.outside="menuOpen = false"
                 class="px-4 pt-3 pb-6 bg-white border-b border-bsds-border">
-                <nav class="grid max-w-7xl gap-1 mx-auto text-sm font-medium sm:grid-cols-3 text-bsds-ink">
+                <nav class="grid gap-1 mx-auto text-sm font-medium max-w-7xl sm:grid-cols-3 text-bsds-ink">
                     @php
                         $menu = auth()->user()->hasRole('student')
                             ? [
@@ -155,7 +155,7 @@
                     </a>
                 </div>
 
-                <div
+                {{-- <div
                     class="flex flex-col items-center justify-center gap-3 mt-8 text-sm font-medium sm:flex-row sm:gap-6 text-bsds-gray">
                     <span class="inline-flex items-center gap-2">
                         <x-heroicon-o-academic-cap class="w-5 h-5 text-bsds-teal" />
@@ -169,11 +169,11 @@
                         <x-heroicon-o-arrow-path class="w-5 h-5 text-bsds-navy" />
                         Belajar dari setiap pilihan
                     </span>
-                </div>
+                </div> --}}
             </div>
         </section>
 
-        <!-- FITUR UNGGULAN -->
+        {{-- <!-- FITUR UNGGULAN -->
         <section id="fitur" class="px-4 py-20 mx-auto lg:py-28 max-w-7xl sm:px-6 lg:px-8 scroll-mt-20">
             <div class="max-w-3xl mx-auto mb-16 text-center">
                 <span
@@ -201,7 +201,7 @@
                 ] as [$title, $desc, $icon])
                     <div
                         class="flex flex-col transition-all bg-white border rounded-2xl border-bsds-border p-7 hover:border-bsds-teal/50 hover:shadow-lg">
-                        <x-dynamic-component :component="'heroicon-o-' . $icon" class="w-7 h-7 mb-4 text-bsds-teal" />
+                        <x-dynamic-component :component="'heroicon-o-' . $icon" class="mb-4 w-7 h-7 text-bsds-teal" />
                         <h3 class="mb-2 text-lg font-bold font-heading text-bsds-navy">{{ $title }}</h3>
                         <p class="flex-1 text-sm leading-relaxed text-bsds-gray">{{ $desc }}</p>
                     </div>
@@ -281,7 +281,7 @@
                     </div>
                 @endforeach
             </div>
-        </section>
+        </section> --}}
     </main>
 
     <!-- FOOTER -->
