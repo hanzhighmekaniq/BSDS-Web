@@ -38,6 +38,7 @@ class Case03Seeder extends Seeder
                     'title' => 'Administrative Service Error: Kesalahan Administrasi Pelayanan',
                     'description' => 'Temukan akar masalah dari kesalahan tagihan ganda, tentukan prioritas penanganan, dan selesaikan dampaknya sebelum berkembang menjadi masalah yang lebih besar.',
                     'level' => 'developing',
+                    'category' => 'kesalahan_pelayanan',
                     'role_title' => 'Staf Administrasi Pelayanan',
                     'briefing_text' => "Selamat datang kembali di PT Nusantara Business Service.\n\nHari ini Anda bertugas di bagian administrasi pelayanan. Saat melakukan audit rutin, Anda menemukan ada kesalahan sistem yang berpotensi memengaruhi lebih dari satu pelanggan.\n\nBerbeda dari kasus sebelumnya, di sini pelanggan belum tentu langsung komplain — keputusan Anda di awal akan menentukan apakah masalah ini selesai dengan tenang atau justru membesar. Perhatikan log sistem, SOP penanganan kesalahan, dan dampaknya terhadap pelanggan lain.",
                     'estimated_time' => 15,

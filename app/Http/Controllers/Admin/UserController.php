@@ -132,7 +132,7 @@ class UserController extends Controller
             $validator = Validator::make($row, [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'email', 'max:255', 'unique:users,email'],
-                'nis' => ['required', 'max:50', 'unique:student_profiles,nis'],
+                'nis' => ['nullable', 'max:50', 'unique:student_profiles,nis'],
                 'absence_no' => ['nullable', 'integer', 'min:1', 'max:200'],
                 'password' => ['nullable', 'string', 'min:8'],
             ]);
@@ -159,12 +159,12 @@ class UserController extends Controller
                 $user->assignRole('student');
                 $user->studentProfile()->create([
                     'classroom_id' => $classroom?->id,
-                    'nis' => (string) $row['nis'],
-                    'absence_no' => $row['absence_no'] ?: null,
+                    'nis' => ($row['nis'] ?? null) ? (string) $row['nis'] : null,
+                    'absence_no' => ($row['absence_no'] ?? null) ?: null,
                 ]);
             });
 
-            $created[] = ['name' => $row['name'], 'email' => $row['email'], 'nis' => (string) $row['nis'], 'password' => $password];
+            $created[] = ['name' => $row['name'], 'email' => $row['email'], 'nis' => (string) ($row['nis'] ?? ''), 'password' => $password];
         }
 
         // Kata sandi hanya ditampilkan sekali (flash), tidak disimpan dalam bentuk teks biasa.

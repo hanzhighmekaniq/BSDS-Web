@@ -38,6 +38,7 @@ class Case02Seeder extends Seeder
                     'title' => 'Difficult Telephone Customer: Pelanggan Marah melalui Telepon',
                     'description' => 'Tangani telepon dari pelanggan yang marah karena pesanan terlambat, kendalikan emosi percakapan, dan temukan solusi yang adil tanpa melanggar kebijakan perusahaan.',
                     'level' => 'developing',
+                    'category' => 'pelanggan_tidak_puas',
                     'role_title' => 'Customer Service Officer (Call Center)',
                     'briefing_text' => "Selamat datang kembali di PT Nusantara Business Service.\n\nHari ini Anda bertugas di meja telepon. Seorang pelanggan menelepon dalam keadaan emosi karena pesanannya belum sampai. Berbeda dengan keluhan tatap muka, Anda tidak dapat menunjukkan ekspresi atau bahasa tubuh — hanya nada suara dan pilihan kata yang Anda miliki.\n\nPerhatikan cara Anda merespons emosi pelanggan, informasi yang tersedia tentang status pengiriman, dan kebijakan kompensasi perusahaan. Keputusan Anda dapat meredakan atau justru memperburuk situasi.",
                     'estimated_time' => 15,

@@ -29,6 +29,7 @@ class CaseRequest extends FormRequest
             'role_title' => ['nullable', 'string', 'max:100'],
             'briefing_text' => ['nullable', 'string', 'max:5000'],
             'level' => ['required', Rule::in(['foundation', 'developing', 'challenge'])],
+            'category' => ['nullable', Rule::in(array_keys(\App\Models\CaseModel::CATEGORIES))],
             'estimated_time' => ['required', 'integer', 'min:1', 'max:240'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:1000'],
             'is_active' => ['boolean'],

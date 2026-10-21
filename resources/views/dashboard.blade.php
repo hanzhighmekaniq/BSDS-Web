@@ -23,6 +23,16 @@
             </div>
 
             @role('student')
+                @unless (auth()->user()->studentProfile?->classroom_id)
+                    <div class="flex flex-col gap-3 p-5 border sm:flex-row sm:items-center sm:justify-between bg-bsds-orange/10 border-bsds-orange/40 rounded-2xl">
+                        <div>
+                            <h4 class="font-semibold font-heading text-bsds-navy">Pilih kelas kamu</h4>
+                            <p class="mt-1 text-sm text-bsds-gray">Kamu belum memilih kelas. Pilih kelas agar hasil belajar tercatat.</p>
+                        </div>
+                        <a href="{{ route('profile.edit') }}#kelas" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-bsds-navy hover:bg-bsds-teal text-white text-sm font-semibold transition shrink-0">Pilih Kelas &rarr;</a>
+                    </div>
+                @endunless
+
                 {{-- Continue simulation --}}
                 @if ($activeSession)
                     <div class="bg-bsds-navy rounded-2xl p-6 text-white">
@@ -56,7 +66,21 @@
                 </div>
 
                 {{-- Quick menu --}}
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="{{ route('materials.index') }}" class="bg-white rounded-2xl border border-bsds-border p-5 hover:border-bsds-teal hover:shadow-md transition">
+                        <div class="w-10 h-10 rounded-xl bg-bsds-teal/10 text-bsds-teal flex items-center justify-center mb-3">
+                            <x-heroicon-o-academic-cap class="w-5 h-5" />
+                        </div>
+                        <h4 class="font-heading font-semibold text-bsds-navy">Materi</h4>
+                        <p class="text-xs text-bsds-gray mt-1">Pelajari konsep sebelum simulasi.</p>
+                    </a>
+                    <a href="{{ route('quizzes.index') }}" class="bg-white rounded-2xl border border-bsds-border p-5 hover:border-bsds-teal hover:shadow-md transition">
+                        <div class="w-10 h-10 rounded-xl bg-bsds-orange/10 text-bsds-orange flex items-center justify-center mb-3">
+                            <x-heroicon-o-clipboard-document-check class="w-5 h-5" />
+                        </div>
+                        <h4 class="font-heading font-semibold text-bsds-navy">Quiz</h4>
+                        <p class="text-xs text-bsds-gray mt-1">Uji pemahaman materi.</p>
+                    </a>
                     <a href="{{ route('simulations.index') }}" class="bg-white rounded-2xl border border-bsds-border p-5 hover:border-bsds-teal hover:shadow-md transition">
                         <div class="w-10 h-10 rounded-xl bg-bsds-navy/10 text-bsds-navy flex items-center justify-center mb-3">
                             <x-heroicon-o-puzzle-piece class="w-5 h-5" />

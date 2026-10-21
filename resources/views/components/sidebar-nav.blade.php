@@ -15,6 +15,14 @@
         </a>
 
         @role('student')
+            <a href="{{ route('materials.index') }}" class="{{ $linkClass(request()->routeIs('materials.*')) }}">
+                <x-heroicon-o-academic-cap class="w-5 h-5 shrink-0" />
+                Materi
+            </a>
+            <a href="{{ route('quizzes.index') }}" class="{{ $linkClass(request()->routeIs('quizzes.*')) }}">
+                <x-heroicon-o-clipboard-document-check class="w-5 h-5 shrink-0" />
+                Quiz
+            </a>
             <a href="{{ route('simulations.index') }}" class="{{ $linkClass(request()->routeIs('simulations.*')) }}">
                 <x-heroicon-o-puzzle-piece class="w-5 h-5 shrink-0" />
                 {{ __('Simulasi') }}

@@ -2,6 +2,8 @@
     $tabs = [
         ['admin.users.*', 'admin.users.index', 'Pengguna'],
         ['admin.classrooms.*', 'admin.classrooms.index', 'Kelas'],
+        ['admin.materials.*', 'admin.materials.index', 'Materi'],
+        ['admin.quizzes.*', 'admin.quizzes.index', 'Quiz'],
         ['admin.cases.*', 'admin.cases.index', 'Kasus'],
         ['admin.indicators.*', 'admin.indicators.index', 'Indikator'],
     ];

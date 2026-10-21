@@ -40,4 +40,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(StudentProfile::class);
     }
+
+    public function quizAttempts()
+    {
+        return $this->hasMany(QuizAttempt::class);
+    }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Classroom;
 use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -23,9 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $classrooms = Classroom::where('is_active', true)->orderBy('name')->get();
-
-        return view('auth.register', compact('classrooms'));
+        return view('auth.register');
     }
 
     /**
@@ -38,9 +35,6 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'classroom_id' => ['required', 'integer', 'exists:classrooms,id'],
-            'absence_no' => ['required', 'integer', 'min:1', 'max:200'],
-            'nis' => ['required', 'string', 'max:50', 'unique:student_profiles,nis'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -52,12 +46,7 @@ class RegisteredUserController extends Controller
 
         $user->assignRole(Role::firstOrCreate(['name' => 'student', 'guard_name' => 'web']));
 
-        StudentProfile::create([
-            'user_id' => $user->id,
-            'classroom_id' => $request->integer('classroom_id'),
-            'nis' => $request->string('nis'),
-            'absence_no' => $request->integer('absence_no'),
-        ]);
+        StudentProfile::create(['user_id' => $user->id]);
 
         event(new Registered($user));
 

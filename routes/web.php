@@ -3,8 +3,11 @@
 use App\Http\Controllers\Admin\CaseController as AdminCaseController;
 use App\Http\Controllers\Admin\ClassroomController as AdminClassroomController;
 use App\Http\Controllers\Admin\IndicatorController as AdminIndicatorController;
+use App\Http\Controllers\Admin\MaterialController as AdminMaterialController;
+use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\Admin\ScenarioController as AdminScenarioController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\LearningController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\SimulationController;
@@ -51,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/classroom', [ProfileController::class, 'updateClassroom'])->middleware('role:student')->name('profile.classroom');
 
     Route::get('/guide', function () {
         return view('guide');
@@ -102,6 +106,15 @@ Route::middleware(['auth', 'role:student'])->prefix('simulations')->name('simula
     Route::get('/{session}/journey', [SimulationController::class, 'journey'])->name('journey');
 });
 
+Route::middleware(['auth', 'role:student'])->group(function () {
+    Route::get('/materi', [LearningController::class, 'materials'])->name('materials.index');
+    Route::get('/materi/{material}', [LearningController::class, 'material'])->name('materials.show');
+    Route::get('/quiz', [LearningController::class, 'quizzes'])->name('quizzes.index');
+    Route::get('/quiz/{quiz}', [LearningController::class, 'quiz'])->name('quizzes.show');
+    Route::post('/quiz/{quiz}', [LearningController::class, 'submit'])->name('quizzes.submit');
+    Route::get('/quiz/{quiz}/hasil/{attempt}', [LearningController::class, 'result'])->name('quizzes.result');
+});
+
 Route::middleware(['auth', 'role:researcher|admin'])->prefix('research')->name('research.')->group(function () {
     Route::get('/', [ResearchController::class, 'index'])->name('index');
     Route::get('/export', [ResearchController::class, 'export'])->name('export');
@@ -113,6 +126,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('users/import', [AdminUserController::class, 'import'])->name('users.import');
     Route::resource('users', AdminUserController::class)->except('show');
     Route::resource('classrooms', AdminClassroomController::class)->except('show');
+    Route::resource('materials', AdminMaterialController::class)->except('show');
+    Route::resource('quizzes', AdminQuizController::class)->except('show');
     Route::get('cases/create', [AdminCaseController::class, 'create'])->name('cases.create');
     Route::post('cases', [AdminCaseController::class, 'store'])->name('cases.store');
     Route::post('cases/import', [AdminCaseController::class, 'import'])->name('cases.import');

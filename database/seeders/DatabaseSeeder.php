@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             Case02Seeder::class,
             Case03Seeder::class,
             Case04Seeder::class,
+            LearningSeeder::class,
         ]);
     }
 }

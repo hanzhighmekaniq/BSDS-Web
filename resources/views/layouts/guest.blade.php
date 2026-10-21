@@ -22,7 +22,6 @@
                     <x-application-logo class="w-14 h-14 text-bsds-navy" />
                 </a>
                 <h1 class="font-heading font-semibold text-bsds-navy text-lg tracking-wide text-center">BUSINESS SERVICE DECISION SIMULATOR</h1>
-                <p class="text-xs text-bsds-gray">Decide. Experience. Learn.</p>
             </div>
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-6 bg-white border border-bsds-border overflow-hidden sm:rounded-2xl">

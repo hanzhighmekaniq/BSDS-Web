@@ -12,11 +12,21 @@ class CaseModel extends Model
 
     protected $table = 'cases';
 
+    public const CATEGORIES = [
+        'pelanggan_tidak_puas' => 'Penanganan Pelanggan Tidak Puas',
+        'prioritas_pelanggan' => 'Penentuan Prioritas Pelanggan',
+        'kesalahan_komunikasi' => 'Kesalahan Komunikasi',
+        'penanganan_keluhan' => 'Penanganan Keluhan',
+        'pemenuhan_permintaan' => 'Pemenuhan Permintaan',
+        'kesalahan_pelayanan' => 'Kesalahan Pelayanan',
+    ];
+
     protected $fillable = [
         'code',
         'title',
         'description',
         'level',
+        'category',
         'role_title',
         'briefing_text',
         'estimated_time',

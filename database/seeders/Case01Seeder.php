@@ -37,6 +37,7 @@ class Case01Seeder extends Seeder
                     'title' => 'Customer Complaint: Menangani Keluhan Pelanggan',
                     'description' => 'Tangani keluhan pelanggan yang menerima produk salah, tentukan solusi di tengah stok terbatas, dan pertanggungjawabkan keputusan Anda kepada supervisor.',
                     'level' => 'foundation',
+                    'category' => 'penanganan_keluhan',
                     'role_title' => 'Customer Service Officer',
                     'briefing_text' => "Selamat datang di PT Nusantara Business Service.\n\nHari ini Anda berperan sebagai Customer Service Officer. Tugas Anda adalah menangani kebutuhan pelanggan, mengidentifikasi masalah, mempertimbangkan berbagai alternatif tindakan, dan menentukan solusi yang sesuai dengan kondisi perusahaan.\n\nPerhatikan SOP pelayanan, kondisi pelanggan, ketersediaan produk, dan kepentingan perusahaan. Keputusan Anda dapat memengaruhi apa yang terjadi selanjutnya.",
                     'estimated_time' => 15,

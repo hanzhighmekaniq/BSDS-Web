@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Classroom;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +20,22 @@ class ProfileController extends Controller
     {
         return view('profile.edit', [
             'user' => $request->user(),
+            'classrooms' => Classroom::where('is_active', true)->orderBy('name')->get(),
         ]);
+    }
+
+    /**
+     * Siswa memilih kelasnya sendiri setelah daftar.
+     */
+    public function updateClassroom(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'classroom_id' => ['required', 'integer', Rule::exists('classrooms', 'id')->where('is_active', true)],
+        ]);
+
+        $request->user()->studentProfile()->updateOrCreate([], $data);
+
+        return Redirect::route('profile.edit')->with('status', 'classroom-updated');
     }
 
     /**

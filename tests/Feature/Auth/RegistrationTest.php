@@ -13,21 +13,14 @@ class RegistrationTest extends TestCase
 
     public function test_registration_screen_can_be_rendered(): void
     {
-        $response = $this->get('/register');
-
-        $response->assertStatus(200);
+        $this->get('/register')->assertOk()->assertDontSee('NIS')->assertDontSee('absence_no');
     }
 
-    public function test_new_users_can_register_with_student_profile(): void
+    public function test_new_users_can_register_without_class_nis_or_absence(): void
     {
-        $classroom = Classroom::create(['name' => 'XI MPLB 1', 'academic_year' => '2026/2027', 'is_active' => true]);
-
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'classroom_id' => $classroom->id,
-            'absence_no' => 7,
-            'nis' => 'BSDS-001',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
@@ -37,29 +30,27 @@ class RegistrationTest extends TestCase
 
         $user = User::where('email', 'test@example.com')->first();
         $this->assertNotNull($user->studentProfile);
-        $this->assertEquals($classroom->id, $user->studentProfile->classroom_id);
-        $this->assertEquals(7, $user->studentProfile->absence_no);
-        $this->assertEquals('BSDS-001', $user->studentProfile->nis);
+        $this->assertNull($user->studentProfile->classroom_id);
         $this->assertTrue($user->hasRole('student'));
     }
 
-    public function test_registration_requires_unique_nis(): void
+    public function test_student_picks_classroom_after_registering(): void
     {
         $classroom = Classroom::create(['name' => 'XI MPLB 1', 'academic_year' => '2026/2027', 'is_active' => true]);
-        $existing = User::factory()->create();
-        $existing->studentProfile()->create(['classroom_id' => $classroom->id, 'nis' => 'BSDS-001', 'absence_no' => 1]);
 
-        $response = $this->post('/register', [
+        $this->post('/register', [
             'name' => 'Test User',
-            'email' => 'test2@example.com',
-            'classroom_id' => $classroom->id,
-            'absence_no' => 8,
-            'nis' => 'BSDS-001',
+            'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
 
-        $response->assertSessionHasErrors('nis');
-        $this->assertGuest();
+        $this->get('/dashboard')->assertSee('Pilih kelas kamu');
+
+        $this->patch('/profile/classroom', ['classroom_id' => $classroom->id])->assertRedirect('/profile');
+
+        $user = User::where('email', 'test@example.com')->first();
+        $this->assertEquals($classroom->id, $user->studentProfile->classroom_id);
+        $this->actingAs($user)->get('/dashboard')->assertDontSee('Pilih kelas kamu');
     }
 }

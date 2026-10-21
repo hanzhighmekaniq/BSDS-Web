@@ -40,6 +40,14 @@
                 <label class="block text-sm font-semibold text-bsds-navy">Briefing
                     <textarea name="briefing_text" rows="5" maxlength="5000" class="{{ $field }}">{{ old('briefing_text', $case->briefing_text) }}</textarea>
                 </label>
+                <label class="block text-sm font-semibold text-bsds-navy">Kategori simulasi
+                    <select name="category" class="{{ $field }}">
+                        <option value="">- Tanpa kategori -</option>
+                        @foreach (\App\Models\CaseModel::CATEGORIES as $value => $label)
+                            <option value="{{ $value }}" @selected(old('category', $case->category) === $value)>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                </label>
                 <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
                     <label class="block text-sm font-semibold text-bsds-navy">Peran
                         <input type="text" name="role_title" value="{{ old('role_title', $case->role_title) }}" maxlength="100" class="{{ $field }}">

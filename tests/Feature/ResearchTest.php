@@ -136,7 +136,7 @@ class ResearchTest extends TestCase
 
         $headings = $respondents->headings();
         $this->assertEquals('S1:B > S2:B > S3:B > S4:B', $rows[0][array_search('rute', $headings)]);
-        $this->assertEquals('BSDS-001', $rows[0][array_search('nis', $headings)]);
+        $this->assertEquals('Siswa Pelatihan CS', $rows[0][array_search('nama', $headings)]);
         $this->assertEquals('practice', $rows[0][array_search('mode', $headings)]);
         $this->assertEquals('assessment', $rows[1][array_search('mode', $headings)]);
         $this->assertEquals('baik', $rows[0][array_search('hasil_akhir', $headings)]);

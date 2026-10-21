@@ -79,15 +79,15 @@ class AdminTest extends TestCase
         $this->actingAs($budi)->get(route('simulations.index'))->assertOk();
     }
 
-    public function test_student_requires_nis_and_unique_email(): void
+    public function test_student_nis_optional_but_email_unique(): void
     {
         $this->actingAs($this->admin)->post(route('admin.users.store'), [
             'name' => 'Tanpa NIS', 'email' => 'student@bsds.test', 'password' => 'rahasia123', 'role' => 'student',
-        ])->assertSessionHasErrors(['nis', 'email']);
+        ])->assertSessionHasErrors('email')->assertSessionDoesntHaveErrors('nis');
 
         $this->actingAs($this->admin)->post(route('admin.users.store'), [
-            'name' => 'Duplikat NIS', 'email' => 'dup@bsds.test', 'password' => 'rahasia123', 'role' => 'student', 'nis' => 'BSDS-001',
-        ])->assertSessionHasErrors('nis');
+            'name' => 'Tanpa NIS', 'email' => 'baru@bsds.test', 'password' => 'rahasia123', 'role' => 'student',
+        ])->assertSessionHasNoErrors();
     }
 
     public function test_admin_can_update_user_role_and_profile(): void
@@ -134,7 +134,7 @@ class AdminTest extends TestCase
             ."Ani Lestari,ani@bsds.test,BSDS-101,XI MPLB 2,1,passwordku1\n"
             ."Dedi Kurnia,dedi@bsds.test,BSDS-102,XI MPLB 2,2,\n"
             ."Dobel Email,student@bsds.test,BSDS-103,XI MPLB 2,3,\n"
-            ."Dobel NIS,baru@bsds.test,BSDS-001,XI MPLB 2,4,\n";
+            ."Dobel NIS,baru@bsds.test,BSDS-101,XI MPLB 2,4,\n";
 
         $file = UploadedFile::fake()->createWithContent('siswa.csv', $csv);
 

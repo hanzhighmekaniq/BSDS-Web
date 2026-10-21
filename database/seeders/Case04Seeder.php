@@ -38,6 +38,7 @@ class Case04Seeder extends Seeder
                     'title' => 'Multiple Customer Problems: Tiga Masalah Datang Bersamaan',
                     'description' => 'Tiga masalah pelanggan muncul dalam waktu bersamaan saat jam sibuk. Tentukan prioritas penanganan berdasarkan urgensi dan dampaknya tanpa mengabaikan pihak mana pun.',
                     'level' => 'challenge',
+                    'category' => 'prioritas_pelanggan',
                     'role_title' => 'Customer Service Officer',
                     'briefing_text' => "Selamat datang kembali di PT Nusantara Business Service.\n\nIni adalah kasus paling menantang. Pada jam sibuk, tiga hal terjadi dalam waktu yang hampir bersamaan: pelanggan walk-in yang menunggu di depan meja, telepon dari pelanggan lain yang sudah lama mengantre, dan email komplain dari klien korporat (VIP) yang berisiko tinggi terhadap perusahaan.\n\nAnda tidak dapat menangani ketiganya sekaligus. Keputusan Anda tentang siapa yang didahulukan — dan bagaimana pihak lain tetap merasa diperhatikan — akan menentukan hasil akhirnya.",
                     'estimated_time' => 20,

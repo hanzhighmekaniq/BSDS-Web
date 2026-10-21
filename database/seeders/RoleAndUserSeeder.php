@@ -54,7 +54,7 @@ class RoleAndUserSeeder extends Seeder
 
         StudentProfile::firstOrCreate(
             ['user_id' => $student->id],
-            ['classroom_id' => $classroom->id, 'nis' => 'BSDS-001', 'absence_no' => 1]
+            ['classroom_id' => $classroom->id]
         );
     }
 }

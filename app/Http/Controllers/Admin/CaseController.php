@@ -39,7 +39,7 @@ class CaseController extends Controller
     public function store(CaseRequest $request): RedirectResponse
     {
         $data = $request->safe()->only([
-            'code', 'title', 'description', 'role_title', 'briefing_text', 'level', 'estimated_time', 'sort_order',
+            'code', 'title', 'description', 'role_title', 'briefing_text', 'level', 'category', 'estimated_time', 'sort_order',
         ]);
         $data['is_active'] = false;
         $data['sort_order'] = $data['sort_order'] ?? ((int) CaseModel::max('sort_order') + 1);

@@ -40,15 +40,35 @@
                 </div>
             @endif
 
+            {{-- Kategori --}}
+            <div x-data="{ cat: null }" class="space-y-6">
+            <div>
+                <h3 class="font-heading font-semibold text-bsds-navy mb-3">Pilih Jenis Simulasi</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    @foreach (\App\Models\CaseModel::CATEGORIES as $key => $label)
+                        @php $n = $cases->where('category', $key)->count(); @endphp
+                        <button type="button" @click="cat = cat === '{{ $key }}' ? null : '{{ $key }}'"
+                            x-bind:class="cat === '{{ $key }}' ? 'border-bsds-teal bg-[#E8F6F6]' : 'border-bsds-border bg-white hover:border-bsds-teal'"
+                            class="p-4 border-2 rounded-2xl text-left transition">
+                            <span class="block font-semibold text-sm text-bsds-navy">{{ $label }}</span>
+                            <span class="block text-xs mt-1 {{ $n ? 'text-bsds-teal' : 'text-bsds-gray' }}">{{ $n ? $n.' kasus' : 'Segera hadir' }}</span>
+                        </button>
+                    @endforeach
+                </div>
+            </div>
+
             {{-- Kasus --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($cases as $case)
-                    <div class="bg-white rounded-2xl border border-bsds-border overflow-hidden flex flex-col hover:shadow-md transition">
+                    <div x-show="cat === null || cat === @js($case->category)" class="bg-white rounded-2xl border border-bsds-border overflow-hidden flex flex-col hover:shadow-md transition">
                         <div class="p-6 flex-1 flex flex-col">
                             <div class="flex items-center justify-between mb-3">
                                 <span class="px-2.5 py-1 text-xs font-semibold rounded-full uppercase bg-bsds-navy/10 text-bsds-navy tracking-wider">{{ $case->code }}</span>
                                 <span class="px-2.5 py-0.5 text-xs font-medium rounded-full bg-bsds-teal/10 text-bsds-teal">{{ $levelLabel[$case->level] ?? ucfirst($case->level) }}</span>
                             </div>
+                            @if ($case->category)
+                                <p class="text-xs font-semibold text-bsds-orange mb-1">{{ \App\Models\CaseModel::CATEGORIES[$case->category] ?? '' }}</p>
+                            @endif
                             <h4 class="font-heading font-semibold text-bsds-navy mb-2">{{ $case->title }}</h4>
                             <p class="text-sm text-bsds-gray line-clamp-3 mb-4 flex-1">{{ $case->description }}</p>
                             <div class="flex items-center text-xs text-bsds-gray pt-3 border-t border-bsds-border gap-4 mb-4">
@@ -74,6 +94,11 @@
                 @empty
                     <div class="col-span-full bg-white p-8 rounded-2xl text-center text-bsds-gray border border-dashed border-bsds-border">Belum ada kasus simulasi yang aktif.</div>
                 @endforelse
+                <div x-show="cat !== null && !{{ Js::from($cases->pluck('category')->filter()->unique()->values()) }}.includes(cat)" x-cloak
+                    class="col-span-full bg-white p-8 rounded-2xl text-center text-bsds-gray border border-dashed border-bsds-border">
+                    Simulasi untuk kategori ini segera hadir.
+                </div>
+            </div>
             </div>
 
             {{-- Riwayat --}}
